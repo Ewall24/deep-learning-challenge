@@ -82,4 +82,4 @@ To improve performance, the following steps are recommended:
 
 ---
 
-By following these steps, the model can be further refined, improving its predictive accuracy and reliability for identifying successful organizations funded by Alphabet Soup.
+
