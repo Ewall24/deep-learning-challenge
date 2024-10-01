@@ -63,9 +63,11 @@ application_df['APPLICATION_TYPE'].value_counts()
 
     Use the number of data points for each unique value to pick a cutoff point to combine "rare" categorical variables together in a new value, Other, and then check if the replacement was successful.
 
-# Choose a cutoff value and create a list of classifications to be replaced
-# use the variable name `classifications_to_replace`
-classifications_to_replace = application_df['CLASSIFICATION'].value_counts().loc[lambda x : x<1883].index.tolist()
+    # Choose a cutoff value and create a list of classifications to be replaced
+    # use the variable name `classifications_to_replace`
+    
+   classifications_to_replace = application_df['CLASSIFICATION'].value_counts().loc[lambda x : x<1883].index.tolist() 
+   
 # Replace in dataframe
 for cls in classifications_to_replace:
     application_df['CLASSIFICATION'] = application_df['CLASSIFICATION'].replace(cls,"Other")
@@ -82,9 +84,48 @@ application_df['CLASSIFICATION'].value_counts()
 
     Use pd.get_dummies() to encode categorical variables.
 
+# Convert categorical data to numeric with `pd.get_dummies`
+application_df = pd.get_dummies(application_df,dtype=float)
+application_df.head() 
+
+
     Split the preprocessed data into a features array, X, and a target array, y. Use these arrays and the train_test_split function to split the data into training and testing datasets.
 
-    Scale the training and testing features datasets by creating a StandardScaler instance, fitting it to the training data, then using the transform function.
+    # Split our preprocessed data into our features and target arrays
+y=application_df['IS_SUCCESSFUL'].values
+X=application_df.drop('IS_SUCCESSFUL', axis=1).values
+
+    # Split the preprocessed data into a training and testing dataset
+X_train, X_test, y_train, y_test = train_test_split(X,y,random_state = 42) 
+
+
+    
+    # Split our preprocessed data into our features and target arrays
+y=application_df['IS_SUCCESSFUL'].values
+X=application_df.drop('IS_SUCCESSFUL', axis=1).values
+
+    # Split the preprocessed data into a training and testing dataset
+# Split the preprocessed data into a training and testing dataset
+X_train, X_test, y_train, y_test = train_test_split(X,y,random_state = 42) 
+
+Scale the training and testing features datasets by creating a StandardScaler instance, fitting it to the training data, then using the transform function.
+
+    # Create a StandardScaler instances
+scaler = StandardScaler()
+
+    # Fit the StandardScaler
+X_scaler = scaler.fit(X_train)
+
+    # Scale the data
+X_train_scaled = X_scaler.transform(X_train)
+X_test_scaled = X_scaler.transform(X_test)  
+
+    # Display the data
+
+print(X_train_scaled)
+
+![image](https://github.com/user-attachments/assets/a27ccdbf-3cb3-4f4d-885b-e07d09ca9294)
+
 
 
 Step 2: Compile, Train, and Evaluate the Model
