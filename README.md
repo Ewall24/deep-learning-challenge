@@ -12,7 +12,25 @@ Start by uploading the starter file to Google Colab, then using the information 
 
     Read in the charity_data.csv to a Pandas DataFrame, and be sure to identify the following in your dataset:
         What variable(s) are the target(s) for your model?
-        What variable(s) are the feature(s) for your model?
+        What variable(s) are the feature(s) for your model?  
+
+ # Import our dependencies
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+import pandas as pd
+import tensorflow as tf 
+import warnings
+warnings.filterwarnings('ignore')
+
+#  Import and read the charity_data.csv.
+import pandas as pd
+application_df = pd.read_csv("https://static.bc-edx.com/data/dl-1-2/m21/lms/starter/charity_data.csv")
+application_df.head()       
+
+
+![image](https://github.com/user-attachments/assets/c3def7df-e753-4c19-a876-de3dd90976fa)    
+
+
 
     Drop the EIN and NAME columns.
 
