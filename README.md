@@ -169,9 +169,74 @@ model.summary()
 model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])  
 
     # Train the model
-model.fit(X_train_scaled, y_train, epochs=100)
+model.fit(X_train_scaled, y_train, epochs=100)  
+
+    # Evaluate the model using the test data
+model_loss, model_accuracy = model.evaluate(X_test_scaled,y_test,verbose=2)
+print(f"Loss: {model_loss}, Accuracy: {model_accuracy}")
+
+
+![image](https://github.com/user-attachments/assets/660b5f71-083e-4181-8826-979bd932b9d6)
+
+    # Export our model to HDF5 file
+model.save('AlphabetSoupCharity.h5') 
+
+
+    # first optimization attempt design the neural network 
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Dense(128, activation='relu', input_shape=(X_train_scaled.shape[1],)),
+    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dense(32, activation='relu'),
+    tf.keras.layers.Dense(1, activation='sigmoid')
+])
 
     
+    # Compile the model
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+    # Train the model with more epochs
+fit_model = model.fit(X_train_scaled, y_train, epochs=150, validation_data=(X_test_scaled, y_test))
+
+    # Evaluate the model
+model_loss, model_accuracy = model.evaluate(X_test_scaled, y_test)
+print(f"Model Loss: {model_loss}, Model Accuracy: {model_accuracy}")
+
+    # Second Optimization attempt
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Dense(128, activation='tanh', input_shape=(X_train_scaled.shape[1],)),
+    tf.keras.layers.Dense(64, activation='tanh'),
+    tf.keras.layers.Dense(32, activation='relu'),
+    tf.keras.layers.Dense(1, activation='sigmoid')
+])
+
+    # Compile the model
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+    # Train the model with more epochs
+fit_model = model.fit(X_train_scaled, y_train, epochs=100, validation_data=(X_test_scaled, y_test))
+
+    # Evaluate the model
+model_loss, model_accuracy = model.evaluate(X_test_scaled, y_test)
+print(f"Model Loss: {model_loss}, Model Accuracy: {model_accuracy}")
+    
+
+    # Third optimization attempt
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Dense(128, activation='tanh', input_shape=(X_train_scaled.shape[1],)),
+    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dense(32, activation='relu'),
+    tf.keras.layers.Dense(1, activation='sigmoid')
+])
+
+    # Compile the model
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+    # Train the model with more epochs
+fit_model = model.fit(X_train_scaled, y_train, epochs=175, validation_data=(X_test_scaled, y_test))
+
+    # Evaluate the model
+model_loss, model_accuracy = model.evaluate(X_test_scaled, y_test)
+print(f"Model Loss: {model_loss}, Model Accuracy: {model_accuracy}")
 
 
 Step 3: Optimize the Model
@@ -202,7 +267,8 @@ Note: If you make at least three attempts at optimizing your model, you will not
     Save and export your results to an HDF5 file. Name the file AlphabetSoupCharity_Optimization.h5.
 
 
-
+    # Export our model to HDF5 file
+model.save('AlphabetSoupCharity_Optimization.h5')
 
 
 
