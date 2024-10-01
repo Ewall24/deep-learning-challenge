@@ -34,6 +34,13 @@ application_df.head()
 
     Drop the EIN and NAME columns.
 
+    # Drop the non-beneficial ID columns, 'EIN' and 'NAME'.
+application_df = application_df.drop(columns = ['EIN', 'NAME']) 
+application_df.head() 
+
+
+
+
     Determine the number of unique values for each column.
 
     For columns that have more than 10 unique values, determine the number of data points for each unique value.
