@@ -39,11 +39,27 @@ application_df = application_df.drop(columns = ['EIN', 'NAME'])
 application_df.head() 
 
 
+![image](https://github.com/user-attachments/assets/b15bbb6b-5999-4658-991d-8082b61be88c) 
 
 
-    Determine the number of unique values for each column.
 
-    For columns that have more than 10 unique values, determine the number of data points for each unique value.
+    # Determine the number of unique values in each column.
+application_df.nunique()
+
+
+![image](https://github.com/user-attachments/assets/5d9c87ac-1730-497a-b8fe-c5c34808b977)
+
+
+    # Look at APPLICATION_TYPE value counts to identify and replace with "Other"
+application_df['APPLICATION_TYPE'].value_counts()
+
+
+
+![image](https://github.com/user-attachments/assets/821e0762-92ac-4d20-8b3e-b0f2b660c08a)  
+
+
+
+    
 
     Use the number of data points for each unique value to pick a cutoff point to combine "rare" categorical variables together in a new value, Other, and then check if the replacement was successful.
 
