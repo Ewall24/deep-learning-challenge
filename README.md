@@ -63,6 +63,23 @@ application_df['APPLICATION_TYPE'].value_counts()
 
     Use the number of data points for each unique value to pick a cutoff point to combine "rare" categorical variables together in a new value, Other, and then check if the replacement was successful.
 
+# Choose a cutoff value and create a list of classifications to be replaced
+# use the variable name `classifications_to_replace`
+classifications_to_replace = application_df['CLASSIFICATION'].value_counts().loc[lambda x : x<1883].index.tolist()
+# Replace in dataframe
+for cls in classifications_to_replace:
+    application_df['CLASSIFICATION'] = application_df['CLASSIFICATION'].replace(cls,"Other")
+
+# Check to make sure replacement was successful
+application_df['CLASSIFICATION'].value_counts()
+
+
+
+![image](https://github.com/user-attachments/assets/4229bf94-e0a6-47b6-92de-12853d22bed7)
+
+
+    
+
     Use pd.get_dummies() to encode categorical variables.
 
     Split the preprocessed data into a features array, X, and a target array, y. Use these arrays and the train_test_split function to split the data into training and testing datasets.
