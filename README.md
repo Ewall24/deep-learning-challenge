@@ -133,24 +133,45 @@ Step 2: Compile, Train, and Evaluate the Model
 Using your knowledge of TensorFlow, you’ll design a neural network, or deep learning model, to create a binary classification model that can predict if an Alphabet Soup-funded organization will be successful based on the features in the dataset. You’ll need to think about how many inputs there are before determining the number of neurons and layers in your model. Once you’ve completed that step, you’ll compile, train, and evaluate your binary classification model to calculate the model’s loss and accuracy.
 
     Continue using the file in Google Colab in which you performed the preprocessing steps from Step 1.
+    
+    # Define the model - deep neural net, i.e., the number of input features and hidden nodes for each layer.
+      
+      Create a callback that saves the model's weights every five epochs.
 
-    Create a neural network model by assigning the number of input features and nodes for each layer using TensorFlow and Keras.
+      Evaluate the model using the test data to determine the loss and accuracy.
 
-    Create the first hidden layer and choose an appropriate activation function.
+      Save and export your results to an HDF5 file. Name the file AlphabetSoupCharity.h5.
 
-    If necessary, add a second hidden layer with an appropriate activation function.
 
-    Create an output layer with an appropriate activation function.
+input_features = len(X_train_scaled[0])
 
-    Check the structure of the model.
+model = tf.keras.models.Sequential()
 
-    Compile and train the model.
+    # First hidden layer
+model.add(tf.keras.layers.Dense(units=80, activation="relu", input_dim=input_features))
 
-    Create a callback that saves the model's weights every five epochs.
+    # Second hidden layer
+model.add(tf.keras.layers.Dense(units=30, activation="relu"))
 
-    Evaluate the model using the test data to determine the loss and accuracy.
+    # Output layer
+model.add(tf.keras.layers.Dense(units=1, activation="sigmoid"))
 
-    Save and export your results to an HDF5 file. Name the file AlphabetSoupCharity.h5.
+    # Check the structure of the model
+model.summary()  
+
+![image](https://github.com/user-attachments/assets/7e7a2680-352c-4993-b168-32fb3388a2ec)
+
+    
+    
+    
+
+    # Compile the model
+model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])  
+
+    # Train the model
+model.fit(X_train_scaled, y_train, epochs=100)
+
+    
 
 
 Step 3: Optimize the Model
